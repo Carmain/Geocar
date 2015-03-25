@@ -29,8 +29,14 @@ public class MainActivity extends ActionBarActivity {
         sendDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = usernameField.getText() + " " + passwordField.getText();
-                Toast.makeText(that, id, Toast.LENGTH_LONG).show();
+                String username = usernameField.getText().toString();
+                String password = passwordField.getText().toString();
+                if (username.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(that, R.string.error_toast, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(that, username + " " + password, Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

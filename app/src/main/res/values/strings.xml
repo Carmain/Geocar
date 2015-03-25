@@ -9,5 +9,6 @@
     <string name="hint_username">Username</string>
     <string name="hint_password">Password</string>
     <string name="button_home">Send</string>
+    <string name="error_toast">You have to fill the two fields!</string>
 
 </resources>
