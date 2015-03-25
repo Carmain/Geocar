@@ -5,6 +5,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
     <style name="background">
         <item name="android:background">@color/grey</item>
         <item name="android:layout_width">match_parent</item>
@@ -20,7 +23,7 @@
         <item name="android:background">@color/white</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginTop">50dp</item>
         <item name="android:padding">20dp</item>
         <item name="android:orientation">vertical</item>
     </style>
