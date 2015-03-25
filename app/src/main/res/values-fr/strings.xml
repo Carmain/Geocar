@@ -10,5 +10,6 @@
     <string name="hint_password">Mot de passe</string>
     <string name="button_home">Envoyer</string>
     <string name="error_toast">Vous devez remplir les deux champs!</string>
+    <string name="error_connection">Erreur lors de la connexion. Merci de réessayer plus tard.</string>
 
 </resources>
