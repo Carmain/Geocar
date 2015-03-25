@@ -5,17 +5,21 @@
 
     <LinearLayout
         style="@style/framed">
+
         <EditText
+            android:id="@+id/username"
             android:hint="@string/hint_username"
             style="@style/edit_view_style"
             android:inputType="text"/>
 
         <EditText
+            android:id="@+id/password"
             android:hint="@string/hint_password"
             style="@style/edit_view_style"
             android:inputType="textPassword"/>
 
         <Button
+            android:id="@+id/sendButton"
             style="@style/button"
             android:text="@string/button_home" />
     </LinearLayout>
