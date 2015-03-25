@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- general -->
+    <string name="app_name">Geocar</string>
+    <string name="action_settings">Paramètres</string>
+
+    <!-- Home page -->
+    <string name="hint_username">Pseudo</string>
+    <string name="hint_password">Mot de passe</string>
+    <string name="button_home">Envoyer</string>
+
+</resources>
