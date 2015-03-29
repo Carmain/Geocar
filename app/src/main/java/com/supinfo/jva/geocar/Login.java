@@ -18,6 +18,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,7 +58,7 @@ public class Login extends ActionBarActivity {
         });
     }
 
-    public void connectUser(String username, String password) {
+    public Boolean connectUser(String username, String password) {
         HttpClient httpclient = new DefaultHttpClient(); // Create a new HttpClient
         HttpPost httppost = new HttpPost("http://91.121.105.200/SUPTracking/"); // Create a post header
 
@@ -72,13 +74,17 @@ public class Login extends ActionBarActivity {
 
             // Execute HTTP Post Request
             HttpResponse response = httpclient.execute(httppost);
-            String json = EntityUtils.toString(response.getEntity());
-            Log.e("", json); // Print the result
+            String json_s = EntityUtils.toString(response.getEntity());
+            JSONObject json = new JSONObject(json_s);
+            return (Boolean) json.get("success");
 
         } catch (ClientProtocolException e) {
             Toast.makeText(this, R.string.error_connection, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Toast.makeText(this, R.string.error_connection, Toast.LENGTH_SHORT).show();
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return false;
     }
 }
