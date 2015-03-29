@@ -1,5 +1,6 @@
 package com.supinfo.jva.geocar;
 
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -51,8 +52,13 @@ public class Login extends ActionBarActivity {
                     Toast.makeText(that, R.string.error_toast, Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    connectUser(username, password);
-                    Toast.makeText(that, username + " " + password, Toast.LENGTH_SHORT).show();
+                    if (connectUser(username, password)) {
+                        Intent home = new Intent(Login.this, Home.class);
+                        startActivity(home);
+                    }
+                    else {
+                        Toast.makeText(that, R.string.error_id, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

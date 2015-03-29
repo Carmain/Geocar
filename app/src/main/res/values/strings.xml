@@ -11,5 +11,6 @@
     <string name="button_home">Send</string>
     <string name="error_toast">You have to fill the two fields!</string>
     <string name="error_connection">Error during the connection. Please try again later.</string>
+    <string name="error_id">Bad combination username - password</string>
 
 </resources>

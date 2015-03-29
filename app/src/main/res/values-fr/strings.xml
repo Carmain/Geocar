@@ -11,5 +11,6 @@
     <string name="button_home">Envoyer</string>
     <string name="error_toast">Vous devez remplir les deux champs!</string>
     <string name="error_connection">Erreur lors de la connexion. Merci de réessayer plus tard.</string>
+    <string name="error_id">Mauvaise combinaison pseudonyme - mot de passe</string>
 
 </resources>
