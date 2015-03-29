@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class Home extends ActionBarActivity {
 
     private EditText usernameField = null;
     private EditText passwordField = null;
@@ -33,12 +33,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.home);
 
         usernameField = (EditText) findViewById(R.id.username);
         passwordField = (EditText) findViewById(R.id.password);
         sendDataButton = (Button) findViewById(R.id.sendButton);
-        final MainActivity that = this;
+        final Home that = this;
 
         sendDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
