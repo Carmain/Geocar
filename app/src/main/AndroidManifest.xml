@@ -5,11 +5,11 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppThemeNoActionBar" >
+        android:label="@string/app_name">
 
         <!-- Login page -->
         <activity
+            android:theme="@style/AppThemeNoActionBar"
             android:name=".Login"
             android:label="@string/app_name" >
             <intent-filter>
@@ -20,6 +20,7 @@
 
         <!-- Home page -->
         <activity
+            android:theme="@style/AppTheme"
             android:name=".Home"
             android:label="@string/app_name">
         </activity>
