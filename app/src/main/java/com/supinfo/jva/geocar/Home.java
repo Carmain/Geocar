@@ -1,6 +1,5 @@
 package com.supinfo.jva.geocar;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,10 +18,10 @@ public class Home extends ActionBarActivity {
         setContentView(R.layout.home);
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Boolean isGPSenabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (isGPSenabled){
+        Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (isGPSEnabled){
             // Test if the GPS is enabled
-            Toast.makeText(this, "GPS is Enabled in your devide", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.okGPS, Toast.LENGTH_SHORT).show(); // TODO : Supprimer la ligne Au moment de la livraison du projet (toast de test)
         }
         else{
             showGPSDisabledAlertToUser();
@@ -31,17 +30,19 @@ public class Home extends ActionBarActivity {
 
     private void showGPSDisabledAlertToUser(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("You must enable the GPS to locate your car. Would you like to enable it?")
+        alertDialogBuilder.setMessage(R.string.errorGPS)
                 .setCancelable(false)
-                .setPositiveButton("Enable GPS",
-                        new DialogInterface.OnClickListener(){
-                            public void onClick(DialogInterface dialog, int id){
+                .setPositiveButton(R.string.enableGPS,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // If we want to active the GPS, we send the user to the activity
                                 Intent callGPSSettingIntent = new Intent(
                                         android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                                 startActivity(callGPSSettingIntent);
                             }
                         });
-        alertDialogBuilder.setNegativeButton("Cancel",
+
+        alertDialogBuilder.setNegativeButton(R.string.cancel,
                 new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int id){
                         dialog.cancel();

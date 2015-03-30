@@ -12,5 +12,9 @@
     <string name="error_toast">Vous devez remplir les deux champs!</string>
     <string name="error_connection">Erreur lors de la connexion. Merci de réessayer plus tard.</string>
     <string name="error_id">Mauvaise combinaison pseudonyme - mot de passe</string>
+    <string name="errorGPS">Vous devez activer le GPS pour localiser votre voiture. Voulez-vous l'activer ?</string>
+    <string name="okGPS">GPS est activé sur votre appareil</string>
+    <string name="enableGPS">Enable GPS</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
