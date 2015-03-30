@@ -65,10 +65,11 @@ public class Home extends ActionBarActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.about:
-                Log.e("Informations : ", "About page!");
+                Intent intent = new Intent(this, About.class);
+                startActivity(intent);
                 break;
             case R.id.quit_app:
-                Log.e("Quit : ", "I qui the app");
+                Log.e("Quit", "I qui the app");
                 break;
             default:
                 Log.e("Other", "Other stuffs");
