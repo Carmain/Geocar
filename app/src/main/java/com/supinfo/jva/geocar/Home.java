@@ -69,7 +69,8 @@ public class Home extends ActionBarActivity {
                 startActivity(intent);
                 break;
             case R.id.quit_app:
-                Log.e("Quit", "I qui the app");
+                finish();
+                System.exit(0);
                 break;
             default:
                 Log.e("Other", "Other stuffs");
