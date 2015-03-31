@@ -1,7 +1,9 @@
 package com.supinfo.jva.geocar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -54,6 +56,13 @@ public class Login extends ActionBarActivity {
                 else {
                     if (connectUser(username, password)) {
                         Intent home = new Intent(Login.this, Home.class);
+
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(that);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", username);
+                        editor.putString("password", password);
+                        editor.commit();
+
                         startActivity(home);
                     }
                     else {
