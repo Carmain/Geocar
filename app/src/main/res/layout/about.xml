@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/background">
+
+    <TextView
+        android:text="@string/about_page"
+        style="@style/title"/>
+
+    <TextView
+        android:text="@string/app_inf"
+        style="@style/subsection"/>
+    
+    <TextView
+        android:id="@+id/version"
+        android:text="@string/version"
+        style="@style/content"/>
+
+    <TextView
+        android:text="@string/licence"
+        style="@style/content"/>
+
+    <TextView
+        android:text="@string/dev_team"
+        style="@style/subsection"/>
+
+    <TextView
+        android:text="@string/chapalain_matthieu"
+        style="@style/content"/>
+    <TextView
+        android:text="@string/dutriaux_julien"
+        style="@style/content"/>
+    <TextView
+        android:text="@string/angelini_adrien"
+        style="@style/content"/>
+    <TextView
+        android:text="@string/billard_martin"
+        style="@style/content"/>
+
+    <Button
+        android:id="@+id/button_git"
+        style="@style/button"
+        android:layout_marginTop="50dp"
+        android:text="@string/contribute"/>
+
 
 </LinearLayout>

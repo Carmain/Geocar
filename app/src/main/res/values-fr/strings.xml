@@ -17,5 +17,9 @@
     <string name="cancel">Cancel</string>
     <string name="about_page">About us</string>
     <string name="quit_app">Quit the app</string>
+    <string name="app_inf">About the app</string>
+    <string name="version">Geocar %1s</string>
+    <string name="licence">This application is under Apache license http://www.apache.org/licenses/</string>
+    <string name="contribute">Contribute to the project</string>
 
 </resources>
