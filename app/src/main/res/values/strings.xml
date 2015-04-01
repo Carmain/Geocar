@@ -27,5 +27,7 @@
     <string name="angelini_adrien">Angelini Adrien</string>
     <string name="billard_martin">Billard Martin</string>
     <string name="contribute">Contribute to the project</string>
+    <string name="errorSession">An error occurs about the session</string>
+    <string name="error_car_position">Couldn\'t get the car position actually</string>
 
 </resources>

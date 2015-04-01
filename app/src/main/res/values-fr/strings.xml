@@ -21,5 +21,7 @@
     <string name="version">Geocar %1s</string>
     <string name="licence">This application is under Apache license http://www.apache.org/licenses/</string>
     <string name="contribute">Contribute to the project</string>
+    <string name="errorSession">An error occurs about the session</string>
+    <string name="error_car_position">Couldn\'t get the car position actually</string>
 
 </resources>
