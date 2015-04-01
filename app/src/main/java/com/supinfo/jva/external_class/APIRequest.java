@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class APIRequest {
 
-    public String connectUser(Context that, String action, String username, String password) {
+    public String requestAPI(Context that, String action, String username, String password) {
         HttpClient httpclient = new DefaultHttpClient(); // Create a new HttpClient
         HttpPost httppost = new HttpPost("http://91.121.105.200/SUPTracking/"); // Create a post header
 
