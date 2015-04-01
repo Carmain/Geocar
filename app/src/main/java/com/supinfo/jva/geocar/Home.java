@@ -13,16 +13,51 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.supinfo.jva.external_class.APIRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Home extends ActionBarActivity {
+
+    private APIRequest requestStuff = new APIRequest();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
+        final Home that = this;
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("username", "");
-        Toast.makeText(this, username, Toast.LENGTH_SHORT).show();
+        String password = preferences.getString("password", "");
+        if(username == "" && password == "") {
+            Toast.makeText(this, R.string.errorSession, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            String response = requestStuff.requestAPI(that, "getCarPosition", username, password);
+            JSONObject json = null;
+            Boolean success = false;
+            try {
+                json = new JSONObject(response);
+                success = (Boolean) json.get("success");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            if (success) {
+                try {
+                    JSONObject position = (JSONObject) json.get("position");
+                    Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    Toast.makeText(that, R.string.error_car_position, Toast.LENGTH_SHORT).show();
+                }
+            }
+            else {
+                Toast.makeText(that, R.string.error_id, Toast.LENGTH_SHORT).show();
+            }
+        }
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
