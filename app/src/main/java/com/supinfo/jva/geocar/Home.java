@@ -15,12 +15,19 @@ import android.widget.Toast;
 
 import com.supinfo.jva.external_class.APIRequest;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Home extends ActionBarActivity {
 
     private APIRequest requestStuff = new APIRequest();
+    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,13 +36,17 @@ public class Home extends ActionBarActivity {
 
         final Home that = this;
 
+        // Get the informations about the user from the login page
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String username = preferences.getString("username", "");
+        String username = preferences.getString("username", ""); // If we couln't get the informations, we return an empty string.
         String password = preferences.getString("password", "");
+
+
         if(username == "" && password == "") {
             Toast.makeText(this, R.string.errorSession, Toast.LENGTH_SHORT).show();
         }
         else {
+            // Request the server to get the car position.
             String response = requestStuff.requestAPI(that, "getCarPosition", username, password);
             JSONObject json = null;
             Boolean success = false;
@@ -49,7 +60,9 @@ public class Home extends ActionBarActivity {
             if (success) {
                 try {
                     JSONObject position = (JSONObject) json.get("position");
-                    Toast.makeText(this, position + "", Toast.LENGTH_SHORT).show();
+                    double latitude =  (double) position.get("latitude");
+                    double longitude = (double) position.get("longitude");
+                    setUpMapIfNeeded(latitude, longitude);
                 } catch (JSONException e) {
                     Toast.makeText(that, R.string.error_car_position, Toast.LENGTH_SHORT).show();
                 }
@@ -59,14 +72,16 @@ public class Home extends ActionBarActivity {
             }
         }
 
+        // Check if the user got the GPS enabled before send his position
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (isGPSEnabled){
-            // Test if the GPS is enabled
-            Toast.makeText(this, R.string.okGPS, Toast.LENGTH_SHORT).show(); // TODO : Supprimer la ligne Au moment de la livraison du projet (toast de test)
+            // TODO : Send the user position every minutes
+            // TODO : Supprimer la ligne Au moment de la livraison du projet (toast de test)
+            Toast.makeText(this, R.string.okGPS, Toast.LENGTH_SHORT).show();
         }
         else{
-            showGPSDisabledAlertToUser();
+
         }
     }
 
@@ -119,6 +134,23 @@ public class Home extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void setUpMapIfNeeded(double latitude, double longitude) {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+                setUpMap(latitude, longitude);
+            }
+        }
+    }
+
+    private void setUpMap(double latitude, double longitude) {
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Marker"));
     }
 
 }
