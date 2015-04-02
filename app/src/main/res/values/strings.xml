@@ -21,7 +21,6 @@
     <string name="app_inf">About the app</string>
     <string name="version">Geocar %1s</string>
     <string name="licence">This application is under Apache license http://www.apache.org/licenses/</string>
-
     <string name="chapalain_matthieu">Chapalain Matthieu</string>
     <string name="dutriaux_julien">Dutriaux Julien</string>
     <string name="angelini_adrien">Angelini Adrien</string>
@@ -29,5 +28,6 @@
     <string name="contribute">Contribute to the project</string>
     <string name="errorSession">An error occurs about the session</string>
     <string name="error_car_position">Couldn\'t get the car position actually</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
