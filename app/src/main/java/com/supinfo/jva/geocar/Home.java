@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.supinfo.jva.external_class.APIRequest;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -145,6 +146,10 @@ public class Home extends ActionBarActivity {
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap(latitude, longitude);
+
+                LatLng carPosition = new LatLng(latitude, longitude);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 5));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 3000, null);
             }
         }
     }
