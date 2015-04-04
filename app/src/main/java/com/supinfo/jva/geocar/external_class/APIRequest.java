@@ -18,14 +18,16 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Martin on 01/04/2015.
  */
 public class APIRequest {
 
-    public String requestAPI(Context that, String action, String username, String password) {
+    public String requestAPI(Context that, String action, String username, String password, Map<String, Double> position) {
         HttpClient httpclient = new DefaultHttpClient(); // Create a new HttpClient
         HttpPost httppost = new HttpPost("http://91.121.105.200/SUPTracking/"); // Create a post header
 
@@ -37,6 +39,12 @@ public class APIRequest {
             nameValuePairs.add(new BasicNameValuePair("action", action));
             nameValuePairs.add(new BasicNameValuePair("login", username));
             nameValuePairs.add(new BasicNameValuePair("password", password));
+
+            if (position.get("latitude") != null) {
+                nameValuePairs.add(new BasicNameValuePair("latitude", position.get("latitude") + ""));
+                nameValuePairs.add(new BasicNameValuePair("longitude", position.get("longitude") + ""));
+            }
+
             httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
             // Execute HTTP Post Request
@@ -49,5 +57,12 @@ public class APIRequest {
             Toast.makeText(that, R.string.error_connection, Toast.LENGTH_SHORT).show();
         }
         return "";
+    }
+
+    public String requestAPI(Context that, String action, String username, String password) {
+        Map<String, Double> position = new HashMap<String, Double>();
+        position.put("latitude", null);
+        position.put("longitude", null);
+        return requestAPI(that, action, username, password, position);
     }
 }
