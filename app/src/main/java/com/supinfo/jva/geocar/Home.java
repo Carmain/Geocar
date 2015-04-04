@@ -55,7 +55,7 @@ public class Home extends ActionBarActivity {
                 json = new JSONObject(response);
                 success = (Boolean) json.get("success");
             } catch (JSONException e) {
-                e.printStackTrace();
+                Toast.makeText(that, R.string.error_car_position, Toast.LENGTH_SHORT).show();
             }
 
             if (success) {
@@ -69,10 +69,14 @@ public class Home extends ActionBarActivity {
                 }
             }
             else {
-                Toast.makeText(that, R.string.error_id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(that, R.string.error_car_position, Toast.LENGTH_SHORT).show();
             }
         }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         // Check if the user got the GPS enabled before send his position
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -82,7 +86,7 @@ public class Home extends ActionBarActivity {
             Toast.makeText(this, R.string.okGPS, Toast.LENGTH_SHORT).show();
         }
         else{
-
+            showGPSDisabledAlertToUser();
         }
     }
 
