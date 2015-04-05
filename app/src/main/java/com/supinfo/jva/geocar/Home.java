@@ -41,7 +41,7 @@ public class Home extends ActionBarActivity {
 
         // Get the informations about the user from the login page
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String username = preferences.getString("username", ""); // If we couln't get the informations, we return an empty string.
+        String username = preferences.getString("username", "");
         String password = preferences.getString("password", "");
 
 
