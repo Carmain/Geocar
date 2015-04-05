@@ -6,7 +6,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +45,8 @@ public class Locator implements LocationListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Toast.makeText(context, success + "", Toast.LENGTH_SHORT).show();
+
+        Log.e("API response", success + "");
     }
 
     @Override

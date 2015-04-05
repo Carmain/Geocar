@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,14 +14,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.supinfo.jva.geocar.external_class.APIRequest;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.supinfo.jva.geocar.external_class.APIRequest;
 import com.supinfo.jva.geocar.external_class.Locator;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +28,7 @@ public class Home extends ActionBarActivity {
 
     private APIRequest requestStuff = new APIRequest();
     private Locator    locator      = new Locator(this);
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private GoogleMap map; // Might be null if Google Play services APK is not available.
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,32 +90,50 @@ public class Home extends ActionBarActivity {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, locator);
         }
         else{
-            showGPSDisabledAlertToUser();
+            connectLocalisationAgreement();
         }
     }
 
-    private void showGPSDisabledAlertToUser(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage(R.string.errorGPS)
-                .setCancelable(false)
-                .setPositiveButton(R.string.enableGPS,
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // If we want to active the GPS, we send the user to the activity
-                                Intent callGPSSettingIntent = new Intent(
-                                        android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                                startActivity(callGPSSettingIntent);
-                            }
-                        });
+    private void connectLocalisationAgreement(){
+        AlertDialog.Builder agreementLocation = new AlertDialog.Builder(this);
+        agreementLocation.setMessage(R.string.errorGPS);
+        agreementLocation.setCancelable(false);
+        agreementLocation.setPositiveButton(R.string.enableGPS, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // If we want to active the GPS, we send the user to the activity
+                Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        });
 
-        alertDialogBuilder.setNegativeButton(R.string.cancel,
-                new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int id){
-                        dialog.cancel();
-                    }
-                });
-        AlertDialog alert = alertDialogBuilder.create();
-        alert.show();
+        agreementLocation.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface window, int id){
+                window.cancel();
+            }
+        });
+
+        AlertDialog alertWindow = agreementLocation.create();
+        alertWindow.show();
+    }
+
+    private void setUpMapIfNeeded(double latitude, double longitude) {
+        if (map == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            // Check if we were successful in obtaining the map.
+            if (map != null) {
+                setUpMap(latitude, longitude);
+
+                LatLng carPosition = new LatLng(latitude, longitude);
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 5));
+                map.animateCamera(CameraUpdateFactory.zoomTo(15), 3000, null);
+            }
+        }
+    }
+
+    private void setUpMap(double latitude, double longitude) {
+        map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Marker"));
     }
 
     @Override
@@ -138,6 +152,8 @@ public class Home extends ActionBarActivity {
                 startActivity(intent);
                 break;
             case R.id.quit_app:
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                preferences.edit().clear().commit();
                 finish();
                 System.exit(0);
                 break;
@@ -148,26 +164,4 @@ public class Home extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    private void setUpMapIfNeeded(double latitude, double longitude) {
-        // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
-                    .getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap(latitude, longitude);
-
-                LatLng carPosition = new LatLng(latitude, longitude);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 5));
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15), 3000, null);
-            }
-        }
-    }
-
-    private void setUpMap(double latitude, double longitude) {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Marker"));
-    }
-
 }

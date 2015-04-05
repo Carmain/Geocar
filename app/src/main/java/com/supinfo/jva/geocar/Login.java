@@ -21,6 +21,7 @@ public class Login extends ActionBarActivity {
     private EditText usernameField = null;
     private EditText passwordField = null;
     private Button sendDataButton = null;
+    private final Login context = this;
 
     private APIRequest requestStuff = new APIRequest();
 
@@ -28,46 +29,66 @@ public class Login extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
+    }
 
-        usernameField = (EditText) findViewById(R.id.username);
-        passwordField = (EditText) findViewById(R.id.password);
-        sendDataButton = (Button) findViewById(R.id.sendButton);
-        final Login that = this;
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        // If we couln't get the informations, we return an empty string.
+        String username = preferences.getString("username", "");
+        String password = preferences.getString("password", "");
 
-        sendDataButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String username = usernameField.getText().toString();
-                String password = passwordField.getText().toString();
-                if (username.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(that, R.string.error_toast, Toast.LENGTH_SHORT).show();
+        if(username == "" && password == "") {
+
+            usernameField = (EditText) findViewById(R.id.username);
+            passwordField = (EditText) findViewById(R.id.password);
+            sendDataButton = (Button) findViewById(R.id.sendButton);
+
+            sendDataButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    logIn();
                 }
-                else {
-                    String response = requestStuff.requestAPI(that, "login", username, password);
-                    Boolean success = false;
-                    try {
-                        JSONObject json = new JSONObject(response);
-                        success = (Boolean) json.get("success");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+            });
+        }
+        else {
+            goHome();
+        }
+    }
 
-                    if (success) {
-                        Intent home = new Intent(Login.this, Home.class);
-
-                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(that);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("username", username);
-                        editor.putString("password", password);
-                        editor.commit();
-
-                        startActivity(home);
-                    }
-                    else {
-                        Toast.makeText(that, R.string.error_id, Toast.LENGTH_SHORT).show();
-                    }
-                }
+    void logIn() {
+        String username = usernameField.getText().toString();
+        String password = passwordField.getText().toString();
+        if (username.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this.context, R.string.error_toast, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            String response = requestStuff.requestAPI(this.context, "login", username, password);
+            Boolean success = false;
+            try {
+                JSONObject json = new JSONObject(response);
+                success = (Boolean) json.get("success");
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        });
+
+            if (success) {
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.context);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("username", username);
+                editor.putString("password", password);
+                editor.commit();
+                goHome();
+            }
+            else {
+                Toast.makeText(this.context, R.string.error_id, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    void goHome() {
+        Intent home = new Intent(Login.this, Home.class);
+        startActivity(home);
     }
 }
