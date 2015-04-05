@@ -23,7 +23,7 @@ public class About extends ActionBarActivity {
         gitButton = (Button) findViewById(R.id.button_git);
 
         Resources res = getResources();
-        String actualVersion = res.getString(R.string.version, "0.0.1");
+        String actualVersion = res.getString(R.string.version, "1.0.0");
         version.setText(actualVersion);
 
         gitButton.setOnClickListener(new View.OnClickListener() {
