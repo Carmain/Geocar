@@ -28,18 +28,14 @@ public class Login extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         // If we couln't get the informations, we return an empty string.
         String username = preferences.getString("username", "");
         String password = preferences.getString("password", "");
 
         if(username == "" && password == "") {
+            setContentView(R.layout.login);
 
             usernameField = (EditText) findViewById(R.id.username);
             passwordField = (EditText) findViewById(R.id.password);
