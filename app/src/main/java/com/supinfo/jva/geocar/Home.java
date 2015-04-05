@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,12 +16,13 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.supinfo.jva.external_class.APIRequest;
+import com.supinfo.jva.geocar.external_class.APIRequest;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.supinfo.jva.geocar.external_class.Locator;
 
 
 import org.json.JSONException;
@@ -28,6 +31,7 @@ import org.json.JSONObject;
 public class Home extends ActionBarActivity {
 
     private APIRequest requestStuff = new APIRequest();
+    private Locator    locator      = new Locator(this);
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
@@ -81,9 +85,13 @@ public class Home extends ActionBarActivity {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (isGPSEnabled){
-            // TODO : Send the user position every minutes
-            // TODO : Supprimer la ligne Au moment de la livraison du projet (toast de test)
-            Toast.makeText(this, R.string.okGPS, Toast.LENGTH_SHORT).show();
+            /**
+             * LocationManager.GPS_PROVIDER : Fournisseur de position
+             * 60000                        : Période entre les mises à jours en millisecondes (ici 1 minute)
+             * 0                            : Période entre les mises à jour en mètre. A zéro car non utilisé
+             * Locator                      : Callback qui sera lancé dès que le fournisseur sera activé
+             */
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, locator);
         }
         else{
             showGPSDisabledAlertToUser();
