@@ -7,7 +7,7 @@
         android:orderInCategory="100" app:showAsAction="never" />
 
     <item
-        android:id="@+id/quit_app"
-        android:title="@string/quit_app"
+        android:id="@+id/log_out"
+        android:title="@string/log_out"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

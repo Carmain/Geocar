@@ -23,5 +23,7 @@
     <string name="contribute">Contribute to the project</string>
     <string name="errorSession">An error occurs about the session</string>
     <string name="error_car_position">Couldn\'t get the car position actually</string>
+    <string name="log_out">Log out</string>
+    <string name="back_pressed">Press back again to quit the app</string>
 
 </resources>

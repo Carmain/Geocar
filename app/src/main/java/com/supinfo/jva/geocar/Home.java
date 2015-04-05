@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,7 +30,9 @@ public class Home extends ActionBarActivity {
 
     private APIRequest requestStuff = new APIRequest();
     private Locator    locator      = new Locator(this);
-    private GoogleMap map; // Might be null if Google Play services APK is not available.
+    private GoogleMap  map;
+    private int        exitCount    = 0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,6 +120,28 @@ public class Home extends ActionBarActivity {
         alertWindow.show();
     }
 
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, R.string.back_pressed, Toast.LENGTH_SHORT).show();
+        exitCount ++;
+        Log.e("On back", exitCount + "");
+        if (exitCount >= 2) {
+            logOut();
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                exitCount = 0;
+            }
+        }, 2000);
+
+    }
+
+    // -------------------------------------------------------------------------------------
+    // -------------------------------  GOOGLE MAP API STUFF -------------------------------
+    // -------------------------------------------------------------------------------------
+
     private void setUpMapIfNeeded(double latitude, double longitude) {
         if (map == null) {
             // Try to obtain the map from the SupportMapFragment.
@@ -136,6 +162,13 @@ public class Home extends ActionBarActivity {
         map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Marker"));
     }
 
+    // -------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------------------
+    // -------------------------------  MENU ACTIVITY STUFF  -------------------------------
+    // -------------------------------------------------------------------------------------
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -151,17 +184,21 @@ public class Home extends ActionBarActivity {
                 Intent intent = new Intent(this, About.class);
                 startActivity(intent);
                 break;
-            case R.id.quit_app:
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-                preferences.edit().clear().commit();
-                finish();
-                System.exit(0);
-                break;
-            default:
-                Log.e("Other", "Other stuffs");
+            case R.id.log_out:
+                logOut();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // -------------------------------------------------------------------------------------
+    // -------------------------------------------------------------------------------------
+
+    public void logOut() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().clear().commit();
+        finish();
+        System.exit(0);
     }
 }
