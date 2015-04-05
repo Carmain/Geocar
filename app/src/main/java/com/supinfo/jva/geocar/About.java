@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-/**
- * Created by Martin on 30/03/2015.
- */
 public class About extends ActionBarActivity {
 
     private TextView version = null;

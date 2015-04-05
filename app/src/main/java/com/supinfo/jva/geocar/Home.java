@@ -9,10 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,8 +18,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.supinfo.jva.geocar.external_class.APIRequest;
-import com.supinfo.jva.geocar.external_class.Locator;
+import com.supinfo.jva.geocar.tools.APIRequest;
+import com.supinfo.jva.geocar.tools.Locator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,6 +96,7 @@ public class Home extends ActionBarActivity {
         }
     }
 
+    // Ask the user to activate his GPS connection
     private void connectLocalisationAgreement(){
         AlertDialog.Builder agreementLocation = new AlertDialog.Builder(this);
         agreementLocation.setMessage(R.string.errorGPS);
@@ -124,7 +123,6 @@ public class Home extends ActionBarActivity {
     public void onBackPressed() {
         Toast.makeText(this, R.string.back_pressed, Toast.LENGTH_SHORT).show();
         exitCount ++;
-        Log.e("On back", exitCount + "");
         if (exitCount >= 2) {
             logOut();
         }
@@ -135,7 +133,6 @@ public class Home extends ActionBarActivity {
                 exitCount = 0;
             }
         }, 2000);
-
     }
 
     // -------------------------------------------------------------------------------------

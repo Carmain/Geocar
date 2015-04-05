@@ -13,8 +13,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.supinfo.jva.geocar.external_class.APIRequest;
-
+import com.supinfo.jva.geocar.tools.APIRequest;
 
 public class Login extends ActionBarActivity {
 
