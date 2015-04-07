@@ -22,9 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Martin on 01/04/2015.
- */
 public class APIRequest {
 
     public String requestAPI(Context that, String action, String username, String password, Map<String, Double> position) {

@@ -14,9 +14,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by Martin on 04/04/2015.
- */
 public class Locator implements LocationListener {
 
     private APIRequest requestStuff = new APIRequest();
@@ -37,7 +34,7 @@ public class Locator implements LocationListener {
         position.put("longitude", location.getLongitude());
 
         String response = requestStuff.requestAPI(context, "updatePosition", username, password, position);
-        JSONObject json = null;
+        JSONObject json;
         Boolean success = false;
         try {
             json = new JSONObject(response);
