@@ -33,7 +33,7 @@ public class Login extends ActionBarActivity {
         String username = preferences.getString("username", "");
         String password = preferences.getString("password", "");
 
-        if(username == "" && password == "") {
+        if(username.equals("") && password.equals("")) {
             setContentView(R.layout.login);
 
             usernameField = (EditText) findViewById(R.id.username);

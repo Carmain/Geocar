@@ -45,7 +45,7 @@ public class Home extends ActionBarActivity {
         String password = preferences.getString("password", "");
 
 
-        if(username == "" && password == "") {
+        if(username.equals("") && password.equals("")) {
             Toast.makeText(this, R.string.errorSession, Toast.LENGTH_SHORT).show();
         }
         else {
