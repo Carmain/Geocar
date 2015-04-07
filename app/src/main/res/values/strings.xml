@@ -16,7 +16,6 @@
     <string name="enableGPS">Enable GPS</string>
     <string name="cancel">Cancel</string>
     <string name="about_page">About us</string>
-    <string name="quit_app">Quit the app</string>
     <string name="dev_team">Our glorious dev team !</string>
     <string name="app_inf">About the app</string>
     <string name="version">Geocar %1s</string>

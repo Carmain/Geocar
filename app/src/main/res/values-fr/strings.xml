@@ -16,6 +16,7 @@
     <string name="enableGPS">Activer le GPS</string>
     <string name="cancel">Annuler</string>
     <string name="about_page">A propos</string>
+    <string name="dev_team">Notre glorieuse team de développeurs</string>
     <string name="app_inf">A propos de l\'application</string>
     <string name="version">Geocar %1s</string>
     <string name="licence">Cette application est sous licence apache http://www.apache.org/licenses/</string>
@@ -24,5 +25,6 @@
     <string name="error_car_position">Impossible de récupérer la position de la voiture actuellement</string>
     <string name="log_out">Se déconnecter</string>
     <string name="back_pressed">Appoyer une nouvelle fois sur retour pour se déconnecter de l\'application</string>
+    <string name="title_activity_maps">Carte</string>
 
 </resources>
