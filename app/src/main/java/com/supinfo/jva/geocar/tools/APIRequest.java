@@ -8,7 +8,6 @@ import com.supinfo.jva.geocar.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -48,8 +47,6 @@ public class APIRequest {
             HttpResponse response = httpclient.execute(httppost);
             return EntityUtils.toString(response.getEntity());
 
-        } catch (ClientProtocolException e) {
-            Toast.makeText(that, R.string.error_connection, Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             Toast.makeText(that, R.string.error_connection, Toast.LENGTH_SHORT).show();
         }
