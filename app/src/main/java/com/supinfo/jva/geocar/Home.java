@@ -39,7 +39,7 @@ public class Home extends ActionBarActivity {
 
         final Home that = this;
 
-        // Get the informations about the user from the login page
+        // Get informations about the user from the login page
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("username", "");
         String password = preferences.getString("password", "");
@@ -84,10 +84,10 @@ public class Home extends ActionBarActivity {
         Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (isGPSEnabled){
             /**
-             * LocationManager.GPS_PROVIDER : Fournisseur de position
-             * 60000                        : Période entre les mises à jours en millisecondes (ici 1 minute)
-             * 0                            : Période entre les mises à jour en mètre. A zéro car non utilisé
-             * Locator                      : Callback qui sera lancé dès que le fournisseur sera activé
+             * LocationManager.GPS_PROVIDER : Use to get the position
+             * 60000                        : Time between updates in milliseconds (within 1 minute)
+             * 0                            : Time between updates meter. At zero because not used
+             * Locator                      : Callback launched as soon as the supplier will be activated
              */
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, locator);
         }
