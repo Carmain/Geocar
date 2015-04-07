@@ -19,7 +19,6 @@ public class Login extends ActionBarActivity {
 
     private EditText usernameField = null;
     private EditText passwordField = null;
-    private Button sendDataButton = null;
     private final Login context = this;
 
     private APIRequest requestStuff = new APIRequest();
@@ -38,7 +37,7 @@ public class Login extends ActionBarActivity {
 
             usernameField = (EditText) findViewById(R.id.username);
             passwordField = (EditText) findViewById(R.id.password);
-            sendDataButton = (Button) findViewById(R.id.sendButton);
+            Button sendDataButton = (Button) findViewById(R.id.sendButton);
 
             sendDataButton.setOnClickListener(new View.OnClickListener() {
                 @Override
