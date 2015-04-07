@@ -32,7 +32,7 @@ public class APIRequest {
         StrictMode.setThreadPolicy(policy);
 
         try {
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            List<NameValuePair> nameValuePairs = new ArrayList<>(2);
             nameValuePairs.add(new BasicNameValuePair("action", action));
             nameValuePairs.add(new BasicNameValuePair("login", username));
             nameValuePairs.add(new BasicNameValuePair("password", password));
@@ -57,7 +57,7 @@ public class APIRequest {
     }
 
     public String requestAPI(Context that, String action, String username, String password) {
-        Map<String, Double> position = new HashMap<String, Double>();
+        Map<String, Double> position = new HashMap<>();
         position.put("latitude", null);
         position.put("longitude", null);
         return requestAPI(that, action, username, password, position);

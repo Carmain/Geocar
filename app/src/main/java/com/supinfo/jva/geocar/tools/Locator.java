@@ -29,7 +29,7 @@ public class Locator implements LocationListener {
         String username = preferences.getString("username", ""); // If we couln't get the informations, we return an empty string.
         String password = preferences.getString("password", "");
 
-        Map<String, Double> position = new HashMap<String, Double>();
+        Map<String, Double> position = new HashMap<>();
         position.put("latitude", location.getLatitude());
         position.put("longitude", location.getLongitude());
 
