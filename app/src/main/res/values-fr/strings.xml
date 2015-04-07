@@ -12,7 +12,6 @@
     <string name="error_connection">Erreur lors de la connexion. Merci de réessayer plus tard.</string>
     <string name="error_id">Mauvaise combinaison pseudonyme - mot de passe</string>
     <string name="errorGPS">Vous devez activer le GPS pour localiser votre voiture. Voulez-vous l\'activer ?</string>
-    <string name="okGPS">GPS est activé sur votre appareil</string>
     <string name="enableGPS">Activer le GPS</string>
     <string name="cancel">Annuler</string>
     <string name="about_page">A propos</string>
