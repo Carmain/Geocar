@@ -192,7 +192,7 @@ public class Home extends ActionBarActivity {
     // -------------------------------------------------------------------------------------
     // -------------------------------------------------------------------------------------
 
-    public void logOut() {
+    private void logOut() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().clear().commit();
         finish();
