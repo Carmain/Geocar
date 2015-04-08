@@ -36,7 +36,10 @@ public class Home extends ActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
+        displayCarPosition();
+    }
 
+    private void displayCarPosition() {
         final Home that = this;
 
         // Get informations about the user from the login page
