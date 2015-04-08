@@ -1,6 +1,7 @@
 package com.supinfo.jva.geocar;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,8 +10,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,9 +31,10 @@ import org.json.JSONObject;
 public class Home extends ActionBarActivity {
 
     private APIRequest requestStuff = new APIRequest();
-    private Locator    locator      = new Locator(this);
-    private GoogleMap  map;
-    private int        exitCount    = 0;
+    private Locator locator = new Locator(this);
+    private GoogleMap map;
+    private int exitCount = 0;
+    private Button findCar = null;
 
 
     @Override
@@ -37,6 +42,76 @@ public class Home extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
         displayCarPosition();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Check if the user got the GPS enabled before send his position
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (isGPSEnabled){
+            /**
+             * LocationManager.GPS_PROVIDER : Use to get the position
+             * 60000                        : Time between updates in milliseconds (within 1 minute)
+             * 0                            : Time between updates meter. At zero because not used
+             * Locator                      : Callback launched as soon as the supplier will be activated
+             */
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, locator);
+        }
+        else{
+            connectLocalisationAgreement();
+        }
+
+        final Context that = this;
+        findCar = (Button) findViewById(R.id.findMyCar);
+
+        findCar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(that, "get the car!", Toast.LENGTH_SHORT).show();
+                displayCarPosition();
+            }
+        });
+    }
+
+    // Ask the user to activate his GPS connection
+    private void connectLocalisationAgreement(){
+        AlertDialog.Builder agreementLocation = new AlertDialog.Builder(this);
+        agreementLocation.setMessage(R.string.errorGPS);
+        agreementLocation.setCancelable(false);
+        agreementLocation.setPositiveButton(R.string.enableGPS, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // If we want to active the GPS, we send the user to the activity
+                Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        });
+
+        agreementLocation.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface window, int id){
+                window.cancel();
+            }
+        });
+
+        AlertDialog alertWindow = agreementLocation.create();
+        alertWindow.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(this, R.string.backPressed, Toast.LENGTH_SHORT).show();
+        exitCount ++;
+        if (exitCount >= 2) {
+            logOut();
+        }
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                exitCount = 0;
+            }
+        }, 2000);
     }
 
     private void displayCarPosition() {
@@ -79,87 +154,35 @@ public class Home extends ActionBarActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Check if the user got the GPS enabled before send his position
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        Boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (isGPSEnabled){
-            /**
-             * LocationManager.GPS_PROVIDER : Use to get the position
-             * 60000                        : Time between updates in milliseconds (within 1 minute)
-             * 0                            : Time between updates meter. At zero because not used
-             * Locator                      : Callback launched as soon as the supplier will be activated
-             */
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 0, locator);
-        }
-        else{
-            connectLocalisationAgreement();
-        }
-    }
-
-    // Ask the user to activate his GPS connection
-    private void connectLocalisationAgreement(){
-        AlertDialog.Builder agreementLocation = new AlertDialog.Builder(this);
-        agreementLocation.setMessage(R.string.errorGPS);
-        agreementLocation.setCancelable(false);
-        agreementLocation.setPositiveButton(R.string.enableGPS, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // If we want to active the GPS, we send the user to the activity
-                Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        });
-
-        agreementLocation.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface window, int id){
-                window.cancel();
-            }
-        });
-
-        AlertDialog alertWindow = agreementLocation.create();
-        alertWindow.show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Toast.makeText(this, R.string.backPressed, Toast.LENGTH_SHORT).show();
-        exitCount ++;
-        if (exitCount >= 2) {
-            logOut();
-        }
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                exitCount = 0;
-            }
-        }, 2000);
-    }
-
     // -------------------------------------------------------------------------------------
     // -------------------------------  GOOGLE MAP API STUFF -------------------------------
     // -------------------------------------------------------------------------------------
 
     private void setUpMapIfNeeded(double latitude, double longitude) {
+        // First
         if (map == null) {
             // Try to obtain the map from the SupportMapFragment.
             map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (map != null) {
-                setUpMap(latitude, longitude);
-
-                LatLng carPosition = new LatLng(latitude, longitude);
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 5));
-                map.animateCamera(CameraUpdateFactory.zoomTo(15), 3000, null);
+                moveCameraFromCar(latitude, longitude);
             }
+        }
+        else {
+            moveCameraFromCar(latitude, longitude);
         }
     }
 
     private void setUpMap(double latitude, double longitude) {
         map.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("Marker"));
+    }
+
+    private void moveCameraFromCar(double latitude, double longitude) {
+        setUpMap(latitude, longitude);
+        LatLng carPosition = new LatLng(latitude, longitude);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(carPosition, 5));
+        map.animateCamera(CameraUpdateFactory.zoomTo(15), 3000, null);
     }
 
     // -------------------------------------------------------------------------------------
