@@ -57,7 +57,7 @@ public class Home extends ActionBarActivity {
                 json = new JSONObject(response);
                 success = (Boolean) json.get("success");
             } catch (JSONException e) {
-                Toast.makeText(that, R.string.error_car_position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(that, R.string.errorCarPosition, Toast.LENGTH_SHORT).show();
             }
 
             if (success) {
@@ -67,11 +67,11 @@ public class Home extends ActionBarActivity {
                     double longitude = (double) position.get("longitude");
                     setUpMapIfNeeded(latitude, longitude);
                 } catch (JSONException e) {
-                    Toast.makeText(that, R.string.error_car_position, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(that, R.string.errorCarPosition, Toast.LENGTH_SHORT).show();
                 }
             }
             else {
-                Toast.makeText(that, R.string.error_car_position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(that, R.string.errorCarPosition, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -121,7 +121,7 @@ public class Home extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        Toast.makeText(this, R.string.back_pressed, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.backPressed, Toast.LENGTH_SHORT).show();
         exitCount ++;
         if (exitCount >= 2) {
             logOut();

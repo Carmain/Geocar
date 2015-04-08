@@ -3,11 +3,11 @@
     style="@style/background">
 
     <TextView
-        android:text="@string/about_page"
+        android:text="@string/aboutPage"
         style="@style/title"/>
 
     <TextView
-        android:text="@string/app_inf"
+        android:text="@string/appInf"
         style="@style/subsection"/>
     
     <TextView
@@ -20,20 +20,20 @@
         style="@style/content"/>
 
     <TextView
-        android:text="@string/dev_team"
+        android:text="@string/devTeam"
         style="@style/subsection"/>
 
     <TextView
-        android:text="@string/chapalain_matthieu"
+        android:text="@string/chapalainMatthieu"
         style="@style/content"/>
     <TextView
-        android:text="@string/dutriaux_julien"
+        android:text="@string/dutriauxJulien"
         style="@style/content"/>
     <TextView
-        android:text="@string/angelini_adrien"
+        android:text="@string/angeliniAdrien"
         style="@style/content"/>
     <TextView
-        android:text="@string/billard_martin"
+        android:text="@string/billardMartin"
         style="@style/content"/>
 
     <Button

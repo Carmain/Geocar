@@ -5,25 +5,26 @@
     <string name="app_name">Geocar</string>
 
     <!-- Home page -->
-    <string name="hint_username">Pseudo</string>
-    <string name="hint_password">Mot de passe</string>
-    <string name="button_home">Envoyer</string>
-    <string name="error_toast">Vous devez remplir les deux champs!</string>
-    <string name="error_connection">Erreur lors de la connexion. Merci de réessayer plus tard.</string>
-    <string name="error_id">Mauvaise combinaison pseudonyme - mot de passe</string>
+    <string name="hintUsername">Pseudo</string>
+    <string name="hintPassword">Mot de passe</string>
+    <string name="buttonHome">Envoyer</string>
+    <string name="errorToast">Vous devez remplir les deux champs!</string>
+    <string name="errorConnection">Erreur lors de la connexion. Merci de réessayer plus tard.</string>
+    <string name="errorId">Mauvaise combinaison pseudonyme - mot de passe</string>
     <string name="errorGPS">Vous devez activer le GPS pour localiser votre voiture. Voulez-vous l\'activer ?</string>
     <string name="enableGPS">Activer le GPS</string>
     <string name="cancel">Annuler</string>
-    <string name="about_page">A propos</string>
-    <string name="dev_team">Notre glorieuse team de développeurs</string>
-    <string name="app_inf">A propos de l\'application</string>
+    <string name="aboutPage">A propos</string>
+    <string name="devTeam">Notre glorieuse team de développeurs</string>
+    <string name="appInf">A propos de l\'application</string>
     <string name="version">Geocar %1s</string>
     <string name="licence">Cette application est sous licence apache http://www.apache.org/licenses/</string>
     <string name="contribute">Contribuer au projet</string>
     <string name="errorSession">Une erreur est arrivée à la récupération de la session</string>
-    <string name="error_car_position">Impossible de récupérer la position de la voiture actuellement</string>
-    <string name="log_out">Se déconnecter</string>
-    <string name="back_pressed">Appoyer une nouvelle fois sur retour pour se déconnecter de l\'application</string>
-    <string name="title_activity_maps">Carte</string>
+    <string name="errorCarPosition">Impossible de récupérer la position de la voiture actuellement</string>
+    <string name="logOut">Se déconnecter</string>
+    <string name="backPressed">Appoyer une nouvelle fois sur retour pour se déconnecter de l\'application</string>
+    <string name="titleActivityMaps">Carte</string>
+    <string name="askFindCar">Où est ma voiture ?</string>
 
 </resources>

@@ -55,7 +55,7 @@ public class Login extends ActionBarActivity {
         String username = usernameField.getText().toString();
         String password = passwordField.getText().toString();
         if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this.context, R.string.error_toast, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this.context, R.string.errorToast, Toast.LENGTH_SHORT).show();
         }
         else {
             String response = requestStuff.requestAPI(this.context, "login", username, password);
@@ -76,7 +76,7 @@ public class Login extends ActionBarActivity {
                 goHome();
             }
             else {
-                Toast.makeText(this.context, R.string.error_id, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this.context, R.string.errorId, Toast.LENGTH_SHORT).show();
             }
         }
     }

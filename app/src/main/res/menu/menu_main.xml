@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/about"
-        android:title="@string/about_page"
+        android:title="@string/aboutPage"
         android:orderInCategory="100" app:showAsAction="never" />
 
     <item
         android:id="@+id/log_out"
-        android:title="@string/log_out"
+        android:title="@string/logOut"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

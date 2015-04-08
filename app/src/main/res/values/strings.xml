@@ -5,29 +5,30 @@
     <string name="app_name">Geocar</string>
 
     <!-- Home page -->
-    <string name="hint_username">Username</string>
-    <string name="hint_password">Password</string>
-    <string name="button_home">Send</string>
-    <string name="error_toast">You have to fill the two fields!</string>
-    <string name="error_connection">Error during the connection. Please try again later.</string>
-    <string name="error_id">Bad combination username - password</string>
+    <string name="hintUsername">Username</string>
+    <string name="hintPassword">Password</string>
+    <string name="buttonHome">Send</string>
+    <string name="errorToast">You have to fill the two fields!</string>
+    <string name="errorConnection">Error during the connection. Please try again later.</string>
+    <string name="errorId">Bad combination username - password</string>
     <string name="errorGPS">You must enable the GPS to locate your car. Would you like to enable it?</string>
     <string name="enableGPS">Enable GPS</string>
     <string name="cancel">Cancel</string>
-    <string name="about_page">About us</string>
-    <string name="dev_team">Our glorious dev team !</string>
-    <string name="app_inf">About the app</string>
+    <string name="aboutPage">About us</string>
+    <string name="devTeam">Our glorious dev team !</string>
+    <string name="appInf">About the app</string>
     <string name="version">Geocar %1s</string>
     <string name="licence">This application is under Apache license http://www.apache.org/licenses/</string>
-    <string name="chapalain_matthieu">Chapalain Matthieu</string>
-    <string name="dutriaux_julien">Dutriaux Julien</string>
-    <string name="angelini_adrien">Angelini Adrien</string>
-    <string name="billard_martin">Billard Martin</string>
+    <string name="chapalainMatthieu">Chapalain Matthieu</string>
+    <string name="dutriauxJulien">Dutriaux Julien</string>
+    <string name="angeliniAdrien">Angelini Adrien</string>
+    <string name="billardMartin">Billard Martin</string>
     <string name="contribute">Contribute to the project</string>
     <string name="errorSession">An error occurs about the session</string>
-    <string name="error_car_position">Couldn\'t get the car position actually</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="log_out">Log out</string>
-    <string name="back_pressed">Press back again to disconnect you</string>
+    <string name="errorCarPosition">Couldn\'t get the car position actually</string>
+    <string name="titleActivityMaps">Map</string>
+    <string name="logOut">Log out</string>
+    <string name="backPressed">Press back again to disconnect you</string>
+    <string name="askFindCar">Where is my car ?</string>
 
 </resources>

@@ -48,7 +48,7 @@ public class APIRequest {
             return EntityUtils.toString(response.getEntity());
 
         } catch (IOException e) {
-            Toast.makeText(that, R.string.error_connection, Toast.LENGTH_SHORT).show();
+            Toast.makeText(that, R.string.errorConnection, Toast.LENGTH_SHORT).show();
         }
         return "";
     }
