@@ -42,8 +42,6 @@ public class Locator implements LocationListener {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        Log.e("API response", success + "");
     }
 
     @Override

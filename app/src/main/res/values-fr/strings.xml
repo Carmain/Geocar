@@ -26,5 +26,6 @@
     <string name="backPressed">Appoyer une nouvelle fois sur retour pour se déconnecter de l\'application</string>
     <string name="titleActivityMaps">Carte</string>
     <string name="askFindCar">Où est ma voiture ?</string>
+    <string name="carSpotted">Voiture repérée !</string>
 
 </resources>

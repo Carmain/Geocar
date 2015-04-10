@@ -30,5 +30,6 @@
     <string name="logOut">Log out</string>
     <string name="backPressed">Press back again to disconnect you</string>
     <string name="askFindCar">Where is my car ?</string>
+    <string name="carSpotted">Car spotted !</string>
 
 </resources>

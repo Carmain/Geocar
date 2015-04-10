@@ -52,6 +52,11 @@ public class Login extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     void logIn() {
         String username = usernameField.getText().toString();
         String password = passwordField.getText().toString();

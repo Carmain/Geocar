@@ -69,7 +69,6 @@ public class Home extends ActionBarActivity {
         findCar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(that, "get the car!", Toast.LENGTH_SHORT).show();
                 displayCarPosition();
             }
         });
