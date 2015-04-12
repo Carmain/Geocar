@@ -13,10 +13,12 @@
     <TextView
         android:id="@+id/version"
         android:text="@string/version"
-        style="@style/content"/>
+        style="@style/content"
+        android:layout_marginBottom="5dp"/>
 
     <TextView
         android:text="@string/licence"
+        android:autoLink="web"
         style="@style/content"/>
 
     <TextView
