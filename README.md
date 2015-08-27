@@ -1,5 +1,6 @@
 # Geocar
-Second 3JVA project
+
+This is a school project based on an external API. So beware of errors due to his removal!
 
 ### Members : 
 
